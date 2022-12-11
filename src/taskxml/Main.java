@@ -57,15 +57,3 @@ public class Main {
     
 }
 
-//<students>
-//    <student id ='1'>
-//        <name>Gamal</name>
-//        <address>hr zu</address>
-//    </student>
-//    <student id ='2'>
-//        <name>Ahmed</name>
-//        <age>45</age>
-//        <address>shr zu</address>
-//    </student>
-//</students>
-
