@@ -47,25 +47,12 @@ public class Parser {
         Token nt = getNextToken();
         switch (nt.type) {
             case OT:
-                S();
+                E();
                 eat(TokenType.EOF);
                 break;
             default:
                 Error("unexpected token " + nt);
 
-        }
-    }
-
-    //S ::= E
-    public void S() throws Exception {
-        Token nt = getNextToken();
-//        print(nt);
-        switch (nt.type) {
-            case OT:
-               E();
-                break;
-            default:
-                Error("unexpected token " + nt);
         }
     }
     public void E() throws Exception {
