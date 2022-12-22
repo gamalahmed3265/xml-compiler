@@ -226,13 +226,3 @@ public class SimpleParser {
     }
 
 }
-
-//E ::= OT E'
-//E' ::= E CT
-//E' ::= TEXT CT
-//OT ::= < ID OT'
-//OT' ::= ATT >
-//OT' ::= >
-//CT ::= < ID CT'
-//CT' ::= >
-//ATT ::= ID = ' TEXT '
