@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
 
 /**
  *
@@ -48,9 +49,28 @@ public class Main {
 
                   SimpleParser sp=new SimpleParser(le);
                   TableData tableData=sp.Expr();
-                  System.out.println("tableData: "+ tableData);
-//                  System.out.println("*************");
-//                System.out.println("tableData: "+ tableData.getRowOfTable());
+                  System.out.println("*************");
+//                  System.out.println("tableData: "+ tableData);
+                  
+                  for (int i = 0; i < tableData.rowOfTable.size(); i++) {
+                    if(tableData.rowOfTable.get(i).student.getId()!=0) {
+//                         System.out.println("id: "+ tableData.rowOfTable.get(i).student.getId());
+//                        System.out.println("names: "+ tableData.rowOfTable.get(i).student.getName());
+//                        System.out.println("age: "+ tableData.rowOfTable.get(i).student.getAge());
+//                        System.out.println("phone: "+ tableData.rowOfTable.get(i).student.getPhone());
+                        
+                        
+                        int id= tableData.rowOfTable.get(i).student.getId();
+                        String name=tableData.rowOfTable.get(i).student.getName();
+                        int age= tableData.rowOfTable.get(i).student.getAge();
+                        int phone= tableData.rowOfTable.get(i).student.getPhone();
+                        
+                        Student student=new Student(name, id, age, phone);
+                        DatabaseClass databaseClass=new DatabaseClass(student);
+                        databaseClass.insertData();
+                  }
+                  }
+                   System.out.println("*************");
                   System.out.println("success");
 
 

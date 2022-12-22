@@ -50,7 +50,7 @@ public class Student {
         return age;
     }
 
-    public int getAddress() {
+    public int getPhone() {
         return phone;
     }
 

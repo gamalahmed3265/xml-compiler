@@ -13,10 +13,10 @@ import java.util.List;
  */
 public class TableData {
 
-    RowOfTable rowOfTable;
+    List<RowOfTable> rowOfTable;
     String tableName;
 
-    public TableData(RowOfTable rowOfTable, String tableName) {
+    public TableData(List<RowOfTable> rowOfTable, String tableName) {
         this.rowOfTable = rowOfTable;
         this.tableName = tableName;
     }
@@ -24,7 +24,7 @@ public class TableData {
     public TableData() {
     }
 
-    public RowOfTable getRowOfTable() {
+    public List<RowOfTable> getRowOfTable() {
         return rowOfTable;
     }
 
@@ -37,7 +37,7 @@ public class TableData {
         return "TableData{" + "rowOfTable=" + rowOfTable + ", tableName=" + tableName + '}';
     }
 
-    public void setRowOfTable(RowOfTable rowOfTable) {
+    public void setRowOfTable(List<RowOfTable> rowOfTable) {
         this.rowOfTable = rowOfTable;
     }
 

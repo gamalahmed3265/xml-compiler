@@ -1,6 +1,24 @@
 package taskxml;
 
 import java.io.*;
+enum TokenType{OT,CT,SLASH,TEXT,ID,QUATION,QUAL,EOF,ATT,ERROR,NUM};
+class Token{
+	String text;
+	int begin;
+	int end;
+	TokenType type;
+	public Token(TokenType type,String text,int begin,int end){
+		this.type=type;
+		this.begin=begin;
+		this.end=end;
+		this.text=text;
+	}
+	public String toString(){
+		return String.format("[%s,%s,%d,%d]",type,text,begin,end);
+	}
+}
+
+
 
 public class SimpleLexer {
 	private final int YY_BUFFER_SIZE = 512;

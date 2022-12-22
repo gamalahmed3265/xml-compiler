@@ -1,6 +1,8 @@
 package taskxml;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -49,7 +51,7 @@ public class SimpleParser {
         TableData tableData = new TableData();
         switch (nt.type) {
             case OT:
-                tableData = E();
+                tableData.rowOfTable = E();
                 eat(TokenType.EOF);
                 break;
             default:
@@ -59,93 +61,53 @@ public class SimpleParser {
         return tableData;
     }
 
-    public TableData E() throws Exception {
+    public List<RowOfTable> E() throws Exception {
         Token nt = getNextToken();
-        String idCT = "";
-//        print(nt);
         TableData tableData = new TableData();
-        TableData g = new TableData();
         RowOfTable rowOfTable = new RowOfTable();
         String tableName="";
         switch (nt.type) {
             case OT:
-//                tableData = OT();
                     rowOfTable=OT();
-                    tableName=E_prime();
-//                System.out.println(rowOfTable);
-//                tableData.setRowOfTable(rowOfTable);
-//                    g = E_prime();
-//                if (rowOfTable==null)
-//                     tableData.rowOfTable.add(rowOfTable);
-                
-                tableData.setRowOfTable(rowOfTable);
-                if (!tableName.isEmpty()){
-                    tableData.setTableName(tableName);
-                }
-                else{
-                    tableData.setTableName("student");
-                }
-                 System.out.println("tableName "+tableName);
-                System.out.println("in E_prime on  " + tableData);
+                    tableData.rowOfTable=E_prime();
+                    tableData.rowOfTable.add(rowOfTable);
                 break;
             default:
                 Error("unexpected token " + nt);
         }
-//        System.out.println("out "+tableData);
-        return tableData;
+        return tableData.rowOfTable;
     }
 //    E' ::= TEXT CT
     // return id for CT and recursion itself
-    public String E_prime() throws Exception {
+    public List<RowOfTable> E_prime() throws Exception {
         Token nt = getNextToken();
-//        System.out.println("--- "+ nt);
+        List<RowOfTable> r=new ArrayList<RowOfTable>();
         String idCT = "";
-//        TableData tableData = new TableData();
         switch (nt.type) {
             case OT:
-//                tableData = E();
-                    E();
+                r=E();
                 idCT=CT();
-//                tableData.setTableName(CT());
-//                System.out.println("idCT "+idCT);
                 break;
             case TEXT:
                 eat(TokenType.TEXT);
                 idCT=CT();
-//                tableData.setTableName(idCT);
-//                System.out.println("idCT "+idCT);
                 break;
             case EOF:
                 break;
             default:
                 Error("unexpected token f" + nt);
         }
-        return idCT;
+        return r;
     }
 // OT ::= < ID OT'
     //return TableData detils
-
     public RowOfTable OT() throws Exception {
         Token nt = getNextToken();
-//        Student student=new Student();
-//        TableData tableData = new TableData();
         RowOfTable rowOfTable = new RowOfTable();
         switch (nt.type) {
             case OT:
                 eat(TokenType.OT);
-//                eat(TokenType.ID);
-//                 System.out.println("--- "+ nt.text);
-//                tableData.setRowOfTable(OTGetValueID());
-//                tableData.rowOfTable.setStudent(OT_prime());
-//                tableData.rowOfTable.add(OTGetValueID());
-//                rowOfTable.student = OT_prime();
-//                tableData.rowOfTable.add(rowOfTable);
-//                System.out.println(tableData);
-//                System.out.println("tableData OT: "+tableData);
-//                eat(TokenType.ID);
                 rowOfTable=OTGetValueID();
-//                student=OT_prime();
-//                System.out.println("Student OT: "+rowOfTable);
                 break;
             default:
                 Error("unexpected token " + nt);
@@ -156,15 +118,12 @@ public class SimpleParser {
     // return the name of raw and Student details
     public RowOfTable OTGetValueID() throws Exception {
         Token nt = getNextToken();
-//        Student student=new Student();
         RowOfTable rowOfTable = new RowOfTable();
         switch (nt.type) {
             case ID:
                 rowOfTable.setRowName(nt.text);
                 eat(TokenType.ID);
-//                 System.out.println("--- "+ nt.text);
                 rowOfTable.setStudent(OT_prime());
-//                System.out.println(rowOfTable);
                 break;
             default:
                 Error("unexpected token " + nt);
@@ -174,7 +133,6 @@ public class SimpleParser {
 //    OT' ::= ATT >
 //    OT' ::= >
     //return Student details
-
     public Student OT_prime() throws Exception {
         Token nt = getNextToken();
         Student student = new Student();
@@ -183,7 +141,6 @@ public class SimpleParser {
                 eat(TokenType.CT);
                 break;
             case ATT:
-//                System.out.println("-- "+ nt);
                 student.setId(Integer.parseInt(ATT(TokenType.NUM)));
                 student.setName(ATT(TokenType.TEXT));
                 student.setAge(Integer.parseInt(ATT(TokenType.NUM)));
@@ -197,14 +154,12 @@ public class SimpleParser {
     }
 //    CT ::= < / ID >
 // return id for CT Tag
-
     public String CT() throws Exception {
         Token nt = getNextToken();
         String idCT = "";
         switch (nt.type) {
             case OT:
                 eat(TokenType.OT);
-//                eat(TokenType.ID);
                 idCT = CTGetvalueID();
                 CT_prime();
                 break;
@@ -245,16 +200,12 @@ public class SimpleParser {
 
     public String ATT(TokenType tokenType) throws Exception {
         Token nt = getNextToken();
-//        System.out.println("this "+nt.text);
         String message = "";
         switch (nt.type) {
             case ATT:
                 eat(TokenType.ATT);
                 eat(TokenType.QUAL);
                 eat(TokenType.QUATION);
-//                System.out.println("this "+nt.text);
-//                eat(tokenType);
-//                eat(TokenType.QUATION);
                 message = getValue(tokenType);
                 break;
             default:
@@ -266,7 +217,6 @@ public class SimpleParser {
     // return value of ATT Num or Text 
     public String getValue(TokenType tokenType) throws Exception {
         Token nt = getNextToken();
-//        System.out.println("this "+nt.text);
         switch (nt.type) {
             case NUM:
                 eat(tokenType);
