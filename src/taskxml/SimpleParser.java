@@ -44,8 +44,7 @@ public class SimpleParser {
             Error(e.getMessage());
             return null;
         }
-    }//    S ::= E$
-
+    }
     public TableData Expr() throws Exception {
         Token nt = getNextToken();
         TableData tableData = new TableData();
@@ -77,7 +76,6 @@ public class SimpleParser {
         }
         return tableData.rowOfTable;
     }
-//    E' ::= TEXT CT
     // return id for CT and recursion itself
     public List<RowOfTable> E_prime() throws Exception {
         Token nt = getNextToken();
@@ -99,7 +97,6 @@ public class SimpleParser {
         }
         return r;
     }
-// OT ::= < ID OT'
     //return TableData detils
     public RowOfTable OT() throws Exception {
         Token nt = getNextToken();
@@ -130,8 +127,6 @@ public class SimpleParser {
         }
         return rowOfTable;
     }
-//    OT' ::= ATT >
-//    OT' ::= >
     //return Student details
     public Student OT_prime() throws Exception {
         Token nt = getNextToken();
@@ -152,7 +147,6 @@ public class SimpleParser {
         }
         return student;
     }
-//    CT ::= < / ID >
 // return id for CT Tag
     public String CT() throws Exception {
         Token nt = getNextToken();
@@ -195,7 +189,6 @@ public class SimpleParser {
                 Error("unexpected token " + nt);
         }
     }
-//    ATT ::= id = ' NUM '
     // return value of ATT Details
 
     public String ATT(TokenType tokenType) throws Exception {
