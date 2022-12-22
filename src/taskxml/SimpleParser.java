@@ -224,5 +224,4 @@ public class SimpleParser {
         }
         return nt.text;
     }
-
 }
