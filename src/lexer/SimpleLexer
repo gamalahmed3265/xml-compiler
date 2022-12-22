@@ -1,5 +1,5 @@
 import java.io.*;
-enum TokenType{OT,CT,SLASH,TEXT,ID,QUATION,QUAL,EOF,ATT,ERROR};
+enum TokenType{OT,CT,TEXT,ID,QUATION,QUAL,EOF,ATT,ERROR,NUM};
 class Token{
 	String text;
 	int begin;
@@ -28,25 +28,24 @@ class Token{
 
 ID = [a-z]
 WS = [\t\n\r\f\ ]
-OT="<"
-CT=">"
+OT=["</","<"]
+CT=["/>",">"]
 SLASH="/"
 QUAL="="
 QUATION="''"
 DIGIT_WITHOUT_ZERO = [1-9]
 TEXT=[a-zA-Z]
 DIGIT = [0-9]
-ATT=["class","id"]
+ATT=["name","id","phone","age"]
 WS = [\t\n\r\f\ ]
 %%
-<YYINITIAL>  {OT} {return new Token(TokenType.OT,yytext(),yychar,yychar+yytext().length());}
-<YYINITIAL>  {ATT} {return new Token(TokenType.ATT,yytext(),yychar,yychar+yytext().length());}
-<YYINITIAL> {CT} {return new Token(TokenType.CT,yytext(),yychar,yychar+yytext().length());}
-<YYINITIAL> {SLASH} {return new Token(TokenType.SLASH,yytext(),yychar,yychar+yytext().length());}
+<YYINITIAL>  {OT}* {return new Token(TokenType.OT,yytext(),yychar,yychar+yytext().length());}
+<YYINITIAL>  {ATT}* {return new Token(TokenType.ATT,yytext(),yychar,yychar+yytext().length());}
+<YYINITIAL> {CT}* {return new Token(TokenType.CT,yytext(),yychar,yychar+yytext().length());}
 <YYINITIAL>  {ID}* {return new Token(TokenType.ID,yytext(),yychar,yychar+yytext().length());}
 <YYINITIAL>  {QUAL} {return new Token(TokenType.QUAL,yytext(),yychar,yychar+yytext().length());}
-<YYINITIAL>  {QUATION} {return new Token(TokenType.QUATION,yytext(),yychar,yychar+yytext().length());}
+<YYINITIAL>  {QUATION}* {return new Token(TokenType.QUATION,yytext(),yychar,yychar+yytext().length());}
 <YYINITIAL>  {TEXT}({TEXT}|{DIGIT})*  {return new Token(TokenType.TEXT,yytext(),yychar,yychar+yytext().length());}
-<YYINITIAL>  0|{DIGIT_WITHOUT_ZERO}{DIGIT}* {return new Token(TokenType.TEXT,yytext(),yychar,yychar+yytext().length());}
+<YYINITIAL>  {DIGIT_WITHOUT_ZERO}{DIGIT}* {return new Token(TokenType.NUM,yytext(),yychar,yychar+yytext().length());}
 <YYINITIAL> {WS}* {}
 <YYINITIAL> . {return new Token(TokenType.ERROR, yytext(), yychar, yychar + yytext().length());}

@@ -1,8 +1,5 @@
-package taskxml;
-
-
 import java.io.*;
-enum TokenType{OT,CT,SLASH,TEXT,ID,QUATION,QUAL,EOF,ATT,ERROR,NUM};
+enum TokenType{OT,CT,TEXT,ID,QUATION,QUAL,EOF,ATT,ERROR,NUM};
 class Token{
 	String text;
 	int begin;
@@ -20,7 +17,7 @@ class Token{
 }
 
 
-public class Lexer {
+public class SimpleLexer {
 	private final int YY_BUFFER_SIZE = 512;
 	private final int YY_F = -1;
 	private final int YY_NO_STATE = -1;
@@ -41,7 +38,7 @@ public class Lexer {
 	private boolean yy_at_bol;
 	private int yy_lexical_state;
 
-	public Lexer (java.io.Reader reader) {
+	public SimpleLexer (java.io.Reader reader) {
 		this ();
 		if (null == reader) {
 			throw (new Error("Error: Bad input stream initializer."));
@@ -49,7 +46,7 @@ public class Lexer {
 		yy_reader = new java.io.BufferedReader(reader);
 	}
 
-	public Lexer (java.io.InputStream instream) {
+	public SimpleLexer (java.io.InputStream instream) {
 		this ();
 		if (null == instream) {
 			throw (new Error("Error: Bad input stream initializer."));
@@ -57,7 +54,7 @@ public class Lexer {
 		yy_reader = new java.io.BufferedReader(new java.io.InputStreamReader(instream));
 	}
 
-	private Lexer () {
+	private SimpleLexer () {
 		yy_buffer = new char[YY_BUFFER_SIZE];
 		yy_buffer_read = 0;
 		yy_buffer_index = 0;
@@ -242,15 +239,16 @@ public class Lexer {
 		/* 14 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,130,
-"13:9,12:2,13,12:2,13:18,12,13:6,8,13:4,2,13:2,4,10,11:9,13:2,1,7,3,13:2,9:2" +
-"6,13:6,5,6,5:2,6:4,5,6:2,5,6:6,5,6:7,13:5,0:2")[0];
+"13:9,12:2,13,12:2,13:18,12,13:6,8,13:4,2,13:2,4,10,11:9,13:2,1,7,5,13:2,9:2" +
+"6,13:6,3,6:2,3:2,6,3:3,6:3,3:4,6:10,13:5,0:2")[0];
 
 	private int yy_rmap[] = unpackFromString(1,15,
-"0,1:6,2,3,4,5,1,6:2,1")[0];
+"0,1,2,3,4,1,5,6,1,7,8,9,10,11,12")[0];
 
-	private int yy_nxt[][] = unpackFromString(7,14,
-"1,2,3,4,5,13,12,6,7,8,14,9,10,14,-1:22,11,-1:10,8:2,-1:2,8:3,-1:12,9:2,-1:1" +
-"4,10,-1:6,12:2,-1:2,8:3,-1:2");
+	private int yy_nxt[][] = unpackFromString(13,14,
+"1,11,13,2,14,3,4,5,6,7,8,9,10,8,-1:16,12,2,-1:2,4,-1:2,7:3,-1:4,3,-1,3:2,-1" +
+":11,4,-1:2,4,-1:2,7:3,-1:10,6,-1:8,7,-1:2,7,-1:2,7:3,-1:12,9:2,-1:14,10,-1:" +
+"2,11:2,-1,11,-1:11,12:2,-1:11,11,13,12,14,3,-1:9,11,14,-1,14,3,-1:8");
 
 	public Token getNextToken ()
 		throws java.io.IOException {
@@ -298,7 +296,7 @@ public class Lexer {
 					yy_to_mark();
 					switch (yy_last_accept_state) {
 					case 0:
-						{return new Token(TokenType.ID,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.OT,yytext(),yychar,yychar+yytext().length());}
 					case -2:
 						break;
 					case 1:
@@ -306,31 +304,31 @@ public class Lexer {
 					case -3:
 						break;
 					case 2:
-						{return new Token(TokenType.OT,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.ATT,yytext(),yychar,yychar+yytext().length());}
 					case -4:
 						break;
 					case 3:
-						{return new Token(TokenType.ATT,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.CT,yytext(),yychar,yychar+yytext().length());}
 					case -5:
 						break;
 					case 4:
-						{return new Token(TokenType.CT,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.ID,yytext(),yychar,yychar+yytext().length());}
 					case -6:
 						break;
 					case 5:
-						{return new Token(TokenType.SLASH,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.QUAL,yytext(),yychar,yychar+yytext().length());}
 					case -7:
 						break;
 					case 6:
-						{return new Token(TokenType.QUAL,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.QUATION,yytext(),yychar,yychar+yytext().length());}
 					case -8:
 						break;
 					case 7:
-						{return new Token(TokenType.ERROR, yytext(), yychar, yychar + yytext().length());}
+						{return new Token(TokenType.TEXT,yytext(),yychar,yychar+yytext().length());}
 					case -9:
 						break;
 					case 8:
-						{return new Token(TokenType.TEXT,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.ERROR, yytext(), yychar, yychar + yytext().length());}
 					case -10:
 						break;
 					case 9:
@@ -342,19 +340,19 @@ public class Lexer {
 					case -12:
 						break;
 					case 11:
-						{return new Token(TokenType.QUATION,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.OT,yytext(),yychar,yychar+yytext().length());}
 					case -13:
 						break;
 					case 12:
-						{return new Token(TokenType.ID,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.ATT,yytext(),yychar,yychar+yytext().length());}
 					case -14:
 						break;
 					case 13:
-						{return new Token(TokenType.ATT,yytext(),yychar,yychar+yytext().length());}
+						{return new Token(TokenType.OT,yytext(),yychar,yychar+yytext().length());}
 					case -15:
 						break;
 					case 14:
-						{return new Token(TokenType.ERROR, yytext(), yychar, yychar + yytext().length());}
+						{return new Token(TokenType.OT,yytext(),yychar,yychar+yytext().length());}
 					case -16:
 						break;
 					default:

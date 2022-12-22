@@ -10,18 +10,18 @@ package taskxml;
  * @author gamal
  */
 public class Student {
-    private String name;
     private int id;
+    private String name="";
     private int age;
-    private String address;
+    private int phone;
 
-    public Student(String name, int id, int age, String address) {
+    public Student(String name, int id, int age, int phone) {
         this.name = name;
         this.id = id;
         this.age = age;
-        this.address = address;
+        this.phone = phone;
     }
-
+ public Student() {}
     public void setName(String name) {
         this.name = name;
     }
@@ -34,8 +34,8 @@ public class Student {
         this.age = age;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 
     public String getName() {
@@ -50,7 +50,12 @@ public class Student {
         return age;
     }
 
-    public String getAddress() {
-        return address;
+    public int getAddress() {
+        return phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", name=" + name + ", age=" + age + ", phone=" + phone + '}';
     }
 }

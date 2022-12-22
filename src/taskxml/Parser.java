@@ -75,7 +75,7 @@ public class Parser {
 //        print(nt);
         switch (nt.type) {
             case OT:
-                E();
+                Expr();
                 CT();
                 break;
             case TEXT:
@@ -133,7 +133,7 @@ public class Parser {
                 Error("unexpected token " + nt);
         }
     }
-//    ATT ::= id = ' TEXT '
+//    ATT ::= id = ' NUM '
 
     public void ATT() throws Exception {
         Token nt = getNextToken();
@@ -142,7 +142,7 @@ public class Parser {
                 eat(TokenType.ID);
                 eat(TokenType.QUAL);
                 eat(TokenType.QUATION);
-                eat(TokenType.TEXT);
+                eat(TokenType.NUM);
                 eat(TokenType.QUATION);
                 break;
             default:
