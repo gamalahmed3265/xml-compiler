@@ -32,15 +32,15 @@ public class Main {
                 SimpleParser sp = new SimpleParser(le);
                 TableData tableData = sp.Expr();
                 System.out.println("*************");
-
+                
+                
                 for (int i = 0; i < tableData.rowOfTable.size(); i++) {
-                    if (tableData.rowOfTable.get(i).student.getId() != 0) {
-
-                        int id = tableData.rowOfTable.get(i).student.getId();
-                        String name = tableData.rowOfTable.get(i).student.getName();
-                        int age = tableData.rowOfTable.get(i).student.getAge();
-                        int phone = tableData.rowOfTable.get(i).student.getPhone();
-
+                    int id = tableData.rowOfTable.get(i).student.getId();
+                    String name = tableData.rowOfTable.get(i).student.getName();
+                    int age = tableData.rowOfTable.get(i).student.getAge();
+                    int phone = tableData.rowOfTable.get(i).student.getPhone();
+//                    System.out.println(tableData.rowOfTable.get(i).student);
+                    if (id != 0 || !name.isEmpty() || age != 0 || phone != 0) {
                         Student student = new Student(name, id, age, phone);
                         DatabaseClass databaseClass = new DatabaseClass(student);
                         databaseClass.insertData();
