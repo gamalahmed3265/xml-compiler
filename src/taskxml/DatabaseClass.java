@@ -23,7 +23,7 @@ public class DatabaseClass {
         this.student=student;
     }
     public static void CreateTable(){
-        String quaryCreateTable="CREATE TABLE IF NOT EXISTS Students (id integer primary key autoincrement,name varchar(255),address varchar(255),age INTEGER)";
+        String quaryCreateTable="CREATE TABLE IF NOT EXISTS Students (id integer primary key autoincrement,name varchar(255),phone INTEGER,age INTEGER)";
              try(
             Connection con=DriverManager.getConnection("jdbc:sqlite:database2.db");
             Statement ss=con.createStatement();
@@ -43,10 +43,10 @@ public class DatabaseClass {
     
 public  void insertData(){
           //IF NOT EXISTS
-          String quaryInsert="INSERT INTO Students (name, address, age)VALUES ('"+
+          String quaryInsert="INSERT INTO Students (name, phone, age)VALUES ('"+
                   student.getName()+
                   "', '"+
-                  student.getAddress()+
+                  student.getPhone()+
                   "', '"+
                   student.getAge()+
                   "');"
