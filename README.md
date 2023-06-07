@@ -37,7 +37,7 @@ Here are some additional details about lexers, parsers, and XML:
 
 
 
-
+## Table
 ![Image alt text](https://github.com/gamalahmed3265/xml-compiler/blob/version2/image/1.png)
 ## Output
 ![Image alt text](https://github.com/gamalahmed3265/xml-compiler/blob/version2/image/output.png)
