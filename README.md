@@ -6,7 +6,7 @@ A lexer, parser, and XML are all related to computer programming. A lexer is a p
 
 A lexer is the first step in parsing an XML document. The lexer breaks down the document into tokens, which are individual pieces of data. For example, a lexer might break down the following XML document into the following tokens:
 
-```
+```html
 <hello>Hello, world!</hello>
 ```
 
@@ -20,7 +20,7 @@ The parser then takes these tokens and interprets them as instructions. For exam
 
 XML is a markup language that is used to represent data in a structured way. XML documents are made up of elements, which are enclosed in tags. Elements can have attributes, which are additional pieces of information about the element. For example, the following XML document represents a person's name:
 
-```
+```html
 <person name="John Doe">
 </person>
 ```
