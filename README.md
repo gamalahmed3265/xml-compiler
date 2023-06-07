@@ -43,4 +43,5 @@ Here are some additional details about lexers, parsers, and XML:
 ![Image alt text](https://github.com/gamalahmed3265/xml-compiler/blob/version2/image/output.png)
 ## Tree
 ![Image alt text](https://github.com/gamalahmed3265/xml-compiler/blob/version2/image/drawing.png)
+# Ruls
 ![Image alt text](https://github.com/gamalahmed3265/xml-compiler/blob/version2/image/2022-12-22-20-23-54.png)
